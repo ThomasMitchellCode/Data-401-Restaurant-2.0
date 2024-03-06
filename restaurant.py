@@ -25,4 +25,7 @@ class Table:
     def get_total(self, rate =0.10):
         return  {'Service Charge': f'£{(self.get_subtotal() * rate):.2f}', 'Sub Total': f'£{self.get_subtotal():.2f}' , 'Total': f'£{(self.get_subtotal() * (1 + rate)):.2f}'}
 
+    def split_bill(self):
+        return self.get_subtotal() / self.capacity
+
 
