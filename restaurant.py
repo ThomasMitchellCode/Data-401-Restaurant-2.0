@@ -19,7 +19,7 @@ class Table:
                     i['quantity'] -= quantity
                 else:
                     self.bill.remove(i)
-                return
+                return True
         return False
     def get_subtotal(self):
         return sum(i['price'] * i['quantity'] for i in self.bill)
@@ -28,5 +28,6 @@ class Table:
 
     def split_bill(self):
         return math.ceil(float((f'{(self.get_subtotal() / self.capacity):.3f}')) *100)/100
+
 
 
