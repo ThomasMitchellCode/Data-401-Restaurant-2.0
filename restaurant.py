@@ -56,4 +56,11 @@ class Table:
 
         return final_message
 
-    
+    def split_bill(self):
+
+        subtotal = self.get_subtotal()
+        split_cost = (subtotal / self.num_diners)
+
+        return split_cost
+
+
