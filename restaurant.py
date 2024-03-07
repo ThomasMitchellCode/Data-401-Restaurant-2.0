@@ -27,3 +27,12 @@ class Table:
                 else:
                     return False
         return False
+
+    def get_subtotal(self):
+
+        subtotal = 0
+
+        for order in self.bill:
+            subtotal += order["price"] * order["quantity"]
+
+        return subtotal
