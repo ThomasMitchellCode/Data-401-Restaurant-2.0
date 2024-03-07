@@ -1,3 +1,4 @@
+import math
 class Table:
     def __init__(self, capacity):
         self.capacity = capacity
@@ -26,6 +27,6 @@ class Table:
         return  {'Service Charge': f'£{(self.get_subtotal() * rate):.2f}', 'Sub Total': f'£{self.get_subtotal():.2f}' , 'Total': f'£{(self.get_subtotal() * (1 + rate)):.2f}'}
 
     def split_bill(self):
-        return self.get_subtotal() / self.capacity
+        return math.ceil(float((f'{(self.get_subtotal() / self.capacity):.3f}')) *100)/100
 
 

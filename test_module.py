@@ -94,6 +94,16 @@ class UnitTests(unittest.TestCase):
             actual, expected, 2,
             "Expected `split_bill` to return 12.20 to 2 decimal places."
         )
+    def test_split_bill_withOdd_values(self):
+        self.table06.order('Food1', 19.02, 3)
+        self.table06.order('Food2', 10.01, 1)
+        self.table06.order('Food3', 3.20, 1)
+        actual = self.table06.split_bill()
+        expected = 11.72
+        self.assertAlmostEqual(
+            actual, expected, 2,
+            "Expected `split_bill` to return 32.23 to 2 decimal places."
+        )
 
 
 if __name__ == "__main__":
