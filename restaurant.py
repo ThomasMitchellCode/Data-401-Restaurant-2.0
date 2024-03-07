@@ -36,3 +36,24 @@ class Table:
             subtotal += order["price"] * order["quantity"]
 
         return subtotal
+
+    def get_total(self, service_charge_rate):
+
+        if service_charge_rate == '':
+            service_charge_rate = 0.10
+        else:
+            service_charge_rate = float(service_charge_rate)
+
+        subtotal = self.get_subtotal()
+        service_charge = subtotal * service_charge_rate
+        total = subtotal + service_charge
+
+        subtotal_str = f'£{subtotal:.2f}'
+        service_charge_str = f'£{service_charge:.2f}'
+        total_str = f'£{total:.2f}'
+
+        final_message = {"Sub Total": subtotal_str, "Service Charge": service_charge_str, "Total": total_str}
+
+        return final_message
+
+    
