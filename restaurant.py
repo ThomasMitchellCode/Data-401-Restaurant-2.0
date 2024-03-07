@@ -2,8 +2,9 @@ class Table:
     def __init__(self, num_diners):
         self.bill = []
         self.num_diners = num_diners
-    def order(self, item, price, quantity = 1):
-        self.bill.append({'item':item, 'price':price, 'quantity':quantity})
+
+    def order(self, item, price, quantity=1):
+        self.bill.append({'item': item, 'price': price, 'quantity': quantity})
 
     def remove(self, item, price, quantity):
         for order in self.bill:
@@ -17,7 +18,6 @@ class Table:
                     return False
         return False
 
-
     def get_subtotal(self):
         subtotal = 0
         for order in self.bill:
@@ -29,10 +29,10 @@ class Table:
         subtotal = self.get_subtotal()
         service_charge = subtotal * service_charge_percentage
         total = subtotal + service_charge
-        subtotalstr = f"£{subtotal:.2f}"
-        servicechargestr = f"£{service_charge:.2f}"
-        totalstr = f"£{total:.2f}"
-        return {'Sub Total':subtotalstr, 'Service Charge':servicechargestr, 'Total':totalstr}
+        subtotal_str = f"£{subtotal:.2f}"
+        service_charge_str = f"£{service_charge:.2f}"
+        total_str = f"£{total:.2f}"
+        return {'Sub Total': subtotal_str, 'Service Charge': service_charge_str, 'Total': total_str}
 
     def split_bill(self):
         subtotal = self.get_subtotal()
