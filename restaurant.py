@@ -1,50 +1,58 @@
 class Table:
-    pass
 
-    # check to see if I can save this file on my branch
-    # successful
+    def __init__(self, diners:int):
+        self.diners = diners
+        self.bill = []
 
-    # constructor
-    def __init__(self, number_of_diners):  # instantiated with the number of diners per table
-        self.bill = []  # an instance variable (an empty list)
 
-    def order(self, item, price,
-              quantity=1):  # order is the method of the class, we will have more methods within the class
+    def order(self, item, price, quantity: int = 1):
+        item_present = False
+        for each_item in self.bill:
+            if each_item["item"] == item and each_item["price"] == price:
+                each_item["quantity"] += quantity
+                item_present = True
+                break
+        if item_present == False:
+            menu_item = {"item": item, "price": price, "quantity": quantity}
+            self.bill.append(menu_item)
 
-        for order in self.bill:
-            if order["item"] == item and order["price"] == price:
-                quantity += order["quantity"]
-
-        self.bill.append({"item": item, "price": price, "quantity": quantity})
-
-    def remove(self, item, price):
-
-        for order in self.bill:
-            if order["item"] == item and order["price"] == price:
-                if order["item"] > item['quantity']:
-                    quantity -= order["quantity"]
-                    if order["quantity"] == 0:
-                        self.bill.remove(order)
-                    return True
+    def remove(self, item, price, quantity: int = 1):
+        item_removal = False
+        for each_item in self.bill:
+            if each_item["item"] == item and each_item["price"] == price and each_item["quantity"] >= quantity:
+                item_removal = True
+                if each_item["quantity"] == quantity:
+                    self.bill.remove(each_item)
                 else:
-                    return False
-        return False
+                    each_item["quantity"] -= quantity
+                break
+        return item_removal
 
     def get_subtotal(self):
-        return sum(order["price"] * order["quantity"] for order in self.bill)
+        total_cost = 0
+        for each_item in self.bill:
+            total_cost += each_item["price"] * each_item["quantity"]
+        return total_cost
 
-    def get_total(self, service_charge = 0.1):
-        subtotal = self.get_subtotal()
-        service_charge = subtotal * service_charge_percentage
-        total = subtotal + service_charge
+    def get_total(self, service_charge: float = 0.10):
+        total_cost = self.get_subtotal()
+        total_bill = {}
+        total_bill["Sub Total"] = "£" + '{0:.2f}'.format(total_cost)
+        service_charge_amount = total_cost * service_charge
+        total_bill["Service Charge"] = "£" + str(round(service_charge_amount,2))
+        total_bill_amount = total_cost + service_charge_amount
+        total_bill["Total"] = "£" + '{0:.2f}'.format(total_bill_amount)
+        return total_bill
+
+    def split_bill(self):
+        sub_total = self.get_subtotal()
+        bill_per_person = round((sub_total/self.diners),2)
+        return bill_per_person
 
 
-        return {"Sub Total": subtotal_str, "Service Charge": service_charge_str, "Total": total_str}
 
-    def split_bill():
-        subtotal = self.get_subtotal()
-        per_person_cost = math.ceil(subtotal / self.number_of_people * 100) / 100.0  # Round up to the nearest penny
-        return per_person_cost
+
+
 
 
 
