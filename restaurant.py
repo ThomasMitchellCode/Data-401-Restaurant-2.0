@@ -46,8 +46,6 @@ class Table:
         per_person_cost = math.ceil(subtotal / self.number_of_people * 100) / 100.0  # Round up to the nearest penny
         return per_person_cost
 
-    #commit
-
 
 
 
